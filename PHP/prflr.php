@@ -26,16 +26,13 @@ class PRFLR {
     public static function init($source, $apikey) {
         self::$sender = new PRFLRSender();
 
-        if (!self::$sender->apikey = $apikey)
+        if (!self::$sender->apikey = substr($apikey, 0, 32))
             throw new Exception('Unknown apikey.');
 
         if (!self::$sender->socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP))
             throw new Exception('Can\'t open socket.');
 
-        if (!$source)
-            self::$sender->source = isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : 'Unknown';
-        else
-            self::$sender->source = $source;
+        self::$sender->source = substr($source, 0, 32);
         self::$sender->thread = uniqid();
     }
 
@@ -93,12 +90,11 @@ class PRFLRSender {
         // format the message
         $message = join(array(
             substr($this->thread, 0, 32),
-            substr($this->source, 0, 32),
+            $this->source,
             substr($timer, 0, 48),
             $time,
             substr($info, 0, 32),
-            substr($this->apikey, 0, 32),
-
+            $this->apikey,
                 ), '|');
 
         if ($this->socket) {

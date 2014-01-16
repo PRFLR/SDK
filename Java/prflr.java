@@ -37,13 +37,13 @@ public class PRFLP {
 			throw new Exception("Unknown apikey.");
 		}
 		else {
-			PRFLP.apiKey = apiKey;
+			PRFLP.apiKey = cut(apiKey, 32);
 		}
 		if(source == null) {
 			throw new Exception("Unknown source.");
 		}
 		else {
-			PRFLP.source = source;
+			PRFLP.source = cut(source, 32);
 		}
 		PRFLP.timers = new ConcurrentHashMap<>();
 	}
@@ -83,11 +83,11 @@ public class PRFLP {
 	private static void send(String timerName, Double time, String thread, String info) throws Exception {
 		String[] dataForSend = {
 			cut(thread, 32),
-			cut(source, 32),
+			source,
 			cut(timerName, 48),
 			Double.toString(time),
 			cut(info, 32),
-			cut(apiKey, 32)
+			apiKey
 		};
 		byte[] buffer = String.format(null, "%s|%s|%s|%s|%s|%s", (Object[])dataForSend).getBytes();
 		try {

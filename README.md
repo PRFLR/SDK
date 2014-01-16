@@ -10,3 +10,28 @@ PRFLR - это сервис помогающий анализировать бы
 
 Подробнее:  https://github.com/AlexeySpiridonov/PRFLR/wiki
 
+
+
+Supported languages
+=====
+
+Done
+* PHP Native
+* PHP Yii Framework Extension
+* Java
+* GOLang
+* Python 2/3
+* Node.js
+* Perl
+
+InProgress
+* Ruby
+* С++
+* C#
+
+TODO
+.NET
+ObjectC
+Erlang
+1С
+

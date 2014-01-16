@@ -1,14 +1,5 @@
 #!/usr/bin/env python
 
-# Threadsafe api
-# usage example:
-
-# from prflr import Prflr
-# p = Prflr('key', '192.168.1.45-testApp')
-# p.begin('mongoDB.save')
-# # do something usefull
-# p.end('mongoDB.save', 'results')
-
 import sys
 import time
 import socket

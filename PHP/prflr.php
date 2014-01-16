@@ -1,24 +1,5 @@
 <?
 
-/*
- *  HOW TO USE 
- * 
- * // configure profiler
- * // set  profiler server:port  and  set source for timers 
- * PRFLR::init(192.168.1.45-testApp', 'yourApiKey');
- * 
- * 
- * //start timer
- * PRFLR::Begin('mongoDB.save');
- * 
- * //some code
- * sleep(1);
- * 
- * //stop timer
- * PRFLR::End('mongoDB.save');
- * 
- */
-
 class PRFLR {
 
     private static $sender;
@@ -33,7 +14,7 @@ class PRFLR {
             throw new Exception('Can\'t open socket.');
 
         self::$sender->source = substr($source, 0, 32);
-        self::$sender->thread = uniqid();
+        self::$sender->thread = getmypid().".".uniqid(); //becouse no threads in PHP
     }
 
     public static function begin($timer) {

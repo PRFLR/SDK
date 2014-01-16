@@ -30,9 +30,9 @@ InProgress
 * C#
 
 TODO
-.NET
-ObjectC
-Erlang
-1С
+* .NET
+* ObjectC
+* Erlang
+* 1С
 
 Как написать SDK для своего языка: https://github.com/PRFLR/SDK/wiki/How-to-make-SDK-for-you-favorite-language

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>PRFLR by PRFLR</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>PRFLR</h1>
+        <h2>Service that shows how fast you application is!</h2>
+        <a href="https://github.com/PRFLR/SDK" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <blockquote>
+<p>Несмотря на внешнюю простоту проекта, в нем сконцентрированы годы работы над крупными сервисами, бессонные ночи в поиске проблемных мест, падающие сервера, "висящие" процессы, таинственные проблемы в коде и множество шишек набитых в попытках их найти. И нам верится, что этот опыт будет полезен другим в виде готового продукта.</p>
+
+<p>PRFLR Team: Алексей Спиридонов, Андрей Евсюков</p>
+</blockquote>
+
+<h1>
+<a name="prflr" class="anchor" href="#prflr"><span class="octicon octicon-link"></span></a>PRFLR</h1>
+
+<p>PRFLR - это сервис помогающий анализировать быстродействие ваших приложений написанных на Java, PHP, GO, Perl, Python, Ruby или C++  realtime и прямо в production режиме. </p>
+
+<p>Для этого вы регистрируетесь в сервисе, интегрируете в свое приложение наше SDK и тут же получаете доступ к данным по производительности вашего приложения. </p>
+
+<p>В первую очередь PRFLR ориентирован на высоконагруженные серверные приложения работающие на больших кластерах, однако применим для небольших проектов, десктоп и мобильных приложений. Конечно если вас действительно волнует вопрос их быстродействия.</p>
+
+<p>PRFLR - это сервис аналитики, направленный на скорейшее обнаружения проблемных по производительности мест в работе приложений.  Realtime и непосредственно на production серверах. Предназначена для использования в связке с системой мониторинга. </p>
+
+<p>PRFLR - не мониторит железо, не строит графики, не собирает логи.  Он делает одну простую вещь, помогает найти "бутылочные горлышки" в коде прямо в production. И ориентирован на большие распределенные кластеры серверов.</p>
+
+<p>PRFLR включает в себя:</p>
+
+<ul>
+<li> SDK под множество языков;</li>
+<li> няшный web-based UI для анализа данных;</li>
+</ul><p>Скоро появится:</p>
+
+<ul>
+<li> плагин для трансляции данных в системы мониторинга серверов типа Zabbix, Munin и Nagios.</li>
+<li> графики распределения времени таймера, для более точного анализа</li>
+<li> снапшоты состояния системы для сравнительного анализа по времени</li>
+</ul><p>PRFLR предназначен для использования на production  серверах,  отправка данных идет по UDP протоколу и не сказывается на быстродействии  приложений.  В зависимости от языка приложения, 1000 таймеров отправляются примерно за 35ms,  что позволяет досконально покрыть код таймерами даже в очень крупной HiLoad системе.    </p>
+
+<p>Все вышеперечисленное доступно прям сейчас и бесплатно. Для коммерческого использования планируется специальный план включающий:</p>
+
+<ul>
+<li>График распределения времени выполнения таймера по частотности</li>
+<li>Трансляция агрегированных данных в Zabbix для комплексного мониторинга приложений</li>
+<li>Увеличенный объем хранимых данных</li>
+<li>Кнопка "Вот щас кайфово!"  - по настоящему крутой функционал не имеющий аналогов. Обучая систему ситуациям,  когда что то идет не так и ситуациям когда все хорошо,  вы будете получать уведомления при отклонении общего состояния системы от допустимого.</li>
+</ul><h1>
+<a name="supported-languages" class="anchor" href="#supported-languages"><span class="octicon octicon-link"></span></a>Supported languages</h1>
+
+<p>Done</p>
+
+<ul>
+<li>PHP Native</li>
+<li>PHP Yii Framework Extension</li>
+<li>Java</li>
+<li>GOLang</li>
+<li>Python 2/3</li>
+<li>Node.js</li>
+<li>Perl</li>
+</ul><p>InProgress</p>
+
+<ul>
+<li>Ruby</li>
+<li>С++</li>
+<li>C#</li>
+</ul><p>TODO</p>
+
+<ul>
+<li>.NET</li>
+<li>ObjectC</li>
+<li>Erlang</li>
+<li>1С</li>
+</ul><p>Как написать SDK для своего языка: <a href="https://github.com/PRFLR/SDK/wiki/How-to-make-SDK-for-you-favorite-language">https://github.com/PRFLR/SDK/wiki/How-to-make-SDK-for-you-favorite-language</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/PRFLR/SDK/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/PRFLR/SDK/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/PRFLR/SDK"></a> is maintained by <a href="https://github.com/PRFLR">PRFLR</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>

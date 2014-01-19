@@ -1,7 +1,7 @@
-<?
+<?php
 
-class PRFLR {
-
+class PRFLR
+{
     private static $sender;
 
     public static function init($source, $apikey) {
@@ -31,8 +31,8 @@ class PRFLR {
 
 }
 
-class PRFLRSender {
-
+class PRFLRSender
+{
     private $timers;
     public $socket;
     public $delayedSend = false;
@@ -84,5 +84,4 @@ class PRFLRSender {
             throw new Exception("Socket not exist\n");
         }
     }
-
 }

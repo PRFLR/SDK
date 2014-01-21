@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PRFLP {
+public class PRFLR {
 	public static String source = null;
 	public static String apiKey = null;
 	public static Integer overflowCount = 100;
@@ -17,7 +17,7 @@ public class PRFLP {
 	private static DatagramSocket socket;
 	private static ConcurrentHashMap<String, Long> timers;
 	private static AtomicInteger counter = new AtomicInteger(0);
-	private PRFLP() {
+	private PRFLR() {
 		
 	}
 	public static void init(String source, String apiKey) throws Exception {
@@ -26,7 +26,7 @@ public class PRFLP {
 		} catch (UnknownHostException e) {
 			throw new Exception("Host unknown.");
 		}
-		PRFLP.port = 4000;
+		PRFLR.port = 4000;
 		try {
 			socket = new DatagramSocket();
 		} catch (SocketException e) {
@@ -37,18 +37,18 @@ public class PRFLP {
 			throw new Exception("Unknown apikey.");
 		}
 		else {
-			PRFLP.apiKey = cut(apiKey, 32);
+			PRFLR.apiKey = cut(apiKey, 32);
 		}
 		if(source == null) {
 			throw new Exception("Unknown source.");
 		}
 		else {
-			PRFLP.source = cut(source, 32);
+			PRFLR.source = cut(source, 32);
 		}
-		PRFLP.timers = new ConcurrentHashMap<>();
+		PRFLR.timers = new ConcurrentHashMap<>();
 	}
 	private static void cleanTimers() {
-		PRFLP.timers.clear();
+		PRFLR.timers.clear();
 	}
 	public static Boolean begin(String timerName) {
 		Integer val = counter.incrementAndGet();

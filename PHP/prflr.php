@@ -14,7 +14,7 @@ class PRFLR
             throw new Exception('Can\'t open socket.');
 
         self::$sender->source = substr($source, 0, 32);
-        self::$sender->thread = getmypid().".".uniqid(); //becouse no threads in PHP
+        self::$sender->thread = getmypid().".".uniqid(); //because no threads in PHP
     }
 
     public static function begin($timer) {

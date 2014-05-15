@@ -16,8 +16,8 @@ type PRFLR struct {
 	Conn   *net.UDPConn
 }
 
-func (p *PRFLR) Setup(url string) error {
-	serverAddr, err := net.ResolveUDPAddr("udp", url)
+func (p *PRFLR) Setup() error {
+	serverAddr, err := net.ResolveUDPAddr("udp", "prflr.org:4000")
 	p.Conn, err = net.DialUDP("udp", nil, serverAddr)
 	p.Thid = uniqid(32)
 	return err

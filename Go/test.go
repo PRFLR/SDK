@@ -13,7 +13,7 @@ func main() {
 		Source: "11msHost",
 		Apikey: "PRFLRApiKey",
 	}
-	err := pr.Setup("prflr.org:4000")
+	err := pr.Setup()
 	if err != nil {
 		log.Fatal("Connection error")
 	}

@@ -1,0 +1,6 @@
+[submodule "PRFLR.SDK.Android"]
+	path = PRFLR.SDK.Android
+	url = https://github.com/PRFLR/PRFLR.SDK.Android
+[submodule "PRFLR.SDK.PHP"]
+	path = PRFLR.SDK.PHP
+	url = https://github.com/PRFLR/PRFLR.SDK.PHP

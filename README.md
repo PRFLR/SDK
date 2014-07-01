@@ -42,6 +42,7 @@ Done
 * PHP Native
 * PHP Yii Framework Extension
 * Java
+* Android Library
 * GOLang
 * Python 2/3
 * Node.js
@@ -51,7 +52,6 @@ InProgress
 * Ruby
 * С++
 * C#
-* Android Library
 
 TODO
 * .NET

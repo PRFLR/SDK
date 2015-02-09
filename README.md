@@ -47,6 +47,7 @@ Done
 * Python 2/3
 * Node.js
 * Perl
+* ObjectC
 
 InProgress
 * Ruby
@@ -55,7 +56,6 @@ InProgress
 
 TODO
 * .NET
-* ObjectC
 * Erlang
 * 1С
 

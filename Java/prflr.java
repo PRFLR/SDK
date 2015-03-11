@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.nio.charset.Charset;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -81,15 +82,15 @@ public class PRFLR {
 			return s.substring(0, maxLength);
 	}
 	private static void send(String timerName, Double time, String thread, String info) throws Exception {
-		String[] dataForSend = {
-			cut(thread, 32),
-			source,
-			cut(timerName, 48),
-			Double.toString(time),
-			cut(info, 32),
-			apiKey
-		};
-		byte[] buffer = String.format(null, "%s|%s|%s|%s|%s|%s", (Object[])dataForSend).getBytes();
+		byte[] buffer = (
+                	  cut(thread, 32) + "|"
+                        + source + "|"
+                        + cut(timerName, 48) + "|"
+                        + Double.toString(time) + "|"
+                        + cut(info, 32) + "|"
+                        + apiKey
+        	).getBytes(Charset.forName("UTF-8"));
+        
 		try {
 			socket.send( new DatagramPacket(buffer, buffer.length, IPAddress, port) );
 		} catch (IOException e) {

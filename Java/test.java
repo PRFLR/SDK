@@ -1,7 +1,7 @@
 public class Program {
 	public static void main(String[] args){
 		try {
-			PRFLR.init("192.168.1.45-testAppn", "testKey");
+			PRFLR.init("192.168.1.45-testAppn", "testKey@prflr.org:4000");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

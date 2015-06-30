@@ -11,7 +11,7 @@ import (
 func main() {
 	pr := &prflr.PRFLR{
 		Source: "11msHost",
-		Apikey: "PRFLRApiKey",
+		Apikey: "PRFLRApiKey@prflr.org:4000",
 	}
 	err := pr.Setup()
 	if err != nil {

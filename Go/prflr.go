@@ -23,7 +23,7 @@ func (p *PRFLR) Init(Source, ApiKey string) error {
 	p.Key = parts[0]
 	serverAddr, err := net.ResolveUDPAddr("udp", parts[1])
 	p.Conn, err = net.DialUDP("udp", nil, serverAddr)
-	p.Thid = uniqid(32) //TODO boolshit! 
+	p.Thid = uniqid(32) //TODO boolshit  fixit! 
 	return err
 }
 
@@ -43,7 +43,7 @@ func (p *PRFLR) End(timer string, info string) {
 }
 
 func (p *PRFLR) send(timer string, dur string, info string) {
-	p.Conn.Write([]byte(fmt.Sprintf("%.32s|%.32s|%.48s|%s|%.32s|%.32s\n", p.Thid, p.Source, timer, dur,info, p.Apikey)))
+	p.Conn.Write([]byte(fmt.Sprintf("%.32s|%.32s|%.48s|%s|%.32s|%.32s\n", p.Thid, p.Source, timer, dur,info, p.Key)))
 
 }
 

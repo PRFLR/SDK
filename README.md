@@ -5,7 +5,7 @@
 PRFLR
 =====
 
-PRFLR - это сервис помогающий анализировать быстродействие ваших приложений написанных на Java, PHP, GO, Perl, Python, Ruby или C++  realtime и прямо в production режиме. 
+PRFLR - это сервис помогающий анализировать быстродействие ваших приложений написанных на Java, PHP, GO, ObjectC, Perl, Python, C#, Node.js или C++  realtime и прямо в production режиме. 
 
 Для этого вы регистрируетесь в сервисе, интегрируете в свое приложение наше SDK и тут же получаете доступ к данным по производительности вашего приложения. 
 
@@ -41,22 +41,24 @@ Supported languages
 Done
 * PHP Native
 * PHP Yii Framework Extension
-* Java
 * Android Library
+* ObjectC
 * GOLang
+
+Beta versions
+* Java
 * Python 2/3
 * Node.js
 * Perl
-* ObjectC
+* С++
+* C#
 
 InProgress
 * Ruby
-* С++
-* C#
 
 TODO
 * .NET
 * Erlang
 * 1С
 
-Как написать SDK для своего языка: https://github.com/PRFLR/SDK/wiki/How-to-make-SDK-for-you-favorite-language
+How to create SDK for your favorite language: https://github.com/PRFLR/SDK/wiki/How-to-make-SDK-for-you-favorite-language

@@ -6,20 +6,24 @@ import (
 	"fmt"
 	"net"
 	"time"
+	"strings"
 )
 
 type PRFLR struct {
 	Source string
-	Apikey string
+	Key string
 	Timers map[string]time.Time
 	Thid   string
 	Conn   *net.UDPConn
 }
 
-func (p *PRFLR) Setup() error {
-	serverAddr, err := net.ResolveUDPAddr("udp", "prflr.org:4000")
+func (p *PRFLR) Init(Source, ApiKey string) error {
+	[]string parts = strings.Split(ApiKey, "@"))
+	p.Source = Source
+	p.Key = parts[0]
+	serverAddr, err := net.ResolveUDPAddr("udp", parts[1])
 	p.Conn, err = net.DialUDP("udp", nil, serverAddr)
-	p.Thid = uniqid(32)
+	p.Thid = uniqid(32) //TODO boolshit! 
 	return err
 }
 

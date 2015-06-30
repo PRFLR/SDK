@@ -9,11 +9,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PRFLR {
 	public static String source = null;
-	public static String apiKey = null;
+	public static String key = null;
+	public static Integer port;
 	public static Integer overflowCount = 100;
 	
 	private static InetAddress IPAddress;
-	private static Integer port;
 	private static DatagramSocket socket;
 	private static ConcurrentHashMap<String, Long> timers;
 	private static AtomicInteger counter = new AtomicInteger(0);
@@ -21,24 +21,27 @@ public class PRFLR {
 		
 	}
 	public static void init(String source, String apiKey) throws Exception {
+		if(apiKey == null) {
+			throw new Exception("Unknown apikey.");
+		}
+		
+		String[] parts = apiKey.split("@");
+                PRFLR.key  = parts[0];
+                parts = apiKey.split(":");
+                host = parts[0];
+                PRFLR.port = parts[1];
+                
 		try {
-			IPAddress = InetAddress.getByName("prflr.org");
+			IPAddress = InetAddress.getByName(parts[0]);
 		} catch (UnknownHostException e) {
 			throw new Exception("Host unknown.");
 		}
-		PRFLR.port = 4000;
 		try {
 			socket = new DatagramSocket();
 		} catch (SocketException e) {
 			throw new Exception("Can't open socket.");
 		}
 		
-		if(apiKey == null) {
-			throw new Exception("Unknown apikey.");
-		}
-		else {
-			PRFLR.apiKey = cut(apiKey, 32);
-		}
 		if(source == null) {
 			throw new Exception("Unknown source.");
 		}
@@ -87,7 +90,7 @@ public class PRFLR {
 			cut(timerName, 48),
 			Double.toString(time),
 			cut(info, 32),
-			apiKey
+			key
 		};
 		byte[] buffer = String.format(null, "%s|%s|%s|%s|%s|%s", (Object[])dataForSend).getBytes();
 		try {

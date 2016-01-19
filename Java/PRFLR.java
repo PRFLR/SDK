@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.*;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
@@ -13,12 +14,12 @@ public class PRFLR {
 
 	public static String source = null;
 	public static String key = null;
-	public static Integer port;
-	public static Integer overflowCount = 100;
+	public static int port;
+	public static int overflowCount = 100;
 
 	private static InetAddress IPAddress;
 	private static DatagramSocket socket;
-	private static ConcurrentHashMap<String, Long> timers;
+	private static Map<String, Long> timers;
 	private static AtomicInteger counter = new AtomicInteger(0);
 
 	private PRFLR() {
@@ -45,7 +46,7 @@ public class PRFLR {
 		try {
 			IPAddress = InetAddress.getByName(host);
 		} catch (UnknownHostException e) {
-			throw new Exception("Host unknown.");
+			throw new Exception("Host unknown: " + host);
 		}
 		try {
 			socket = new DatagramSocket();
@@ -65,32 +66,39 @@ public class PRFLR {
 		PRFLR.timers.clear();
 	}
 
-	public static Boolean begin(String timerName) {
-		Integer val = counter.incrementAndGet();
+	private static String threadId() {
+		return Long.toString(Thread.currentThread().getId());
+	}
+
+	private static String timerId(String timerName) {
+		return threadId() + timerName;
+	}
+
+	public static boolean begin(String timerName) {
+		int val = counter.incrementAndGet();
 		if (val > overflowCount) {
 			cleanTimers();
 			counter.set(0);
 		}
-		timers.put(Long.toString(Thread.currentThread().getId()) + timerName, System.nanoTime());
+		timers.put(timerId(timerName), System.nanoTime());
 		return true;
 	}
 
-	public static Boolean end(String timerName, String info) throws Exception {
-		String thread = Long.toString(Thread.currentThread().getId());
-		Long startTime = timers.get(thread + timerName);
+	public static boolean end(String timerName, String info) throws Exception {
+		Long startTime = timers.remove(timerId(timerName));
 		if (startTime == null) {
 			return false;
 		}
+		String thread = threadId();
 		counter.decrementAndGet();
-		timers.remove(timerName);
-		Long now = System.nanoTime();
-		Long precision = (long) Math.pow(10, 3);
-		Double diffTime = (double) Math.round((double) (now - startTime) / 1000000 * precision) / precision;
+		long now = System.nanoTime();
+		long precision = (long) Math.pow(10, 3);
+		double diffTime = (double) Math.round((double) (now - startTime) / 1000000 * precision) / precision;
 		send(timerName, diffTime, thread, info);
 		return true;
 	}
 
-	private static String cut(String s, Integer maxLength) {
+	private static String cut(String s, int maxLength) {
 		if (s.length() < maxLength) {
 			return s;
 		} else {
@@ -98,7 +106,7 @@ public class PRFLR {
 		}
 	}
 
-	private static void send(String timerName, Double time, String thread, String info) throws Exception {
+	private static void send(String timerName, double time, String thread, String info) throws Exception {
 		String[] dataForSend = {
 				cut(thread, 32),
 				source,

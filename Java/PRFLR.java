@@ -58,7 +58,7 @@ public class PRFLR {
 		} else {
 			PRFLR.source = cut(source, 32);
 		}
-		PRFLR.timers = new ConcurrentHashMap<>();
+		PRFLR.timers = new ConcurrentHashMap<String, Long>();
 	}
 
 	private static void cleanTimers() {

@@ -74,6 +74,12 @@ public class PRFLR {
 		return threadId() + timerName;
 	}
 
+	/**
+	 * Start track time for timer
+	 *
+	 * @param timerName Timer name. Max length 48. Can include dot (".") to separate parts of name
+	 * @return Always true
+	 */
 	public static boolean begin(String timerName) {
 		int val = counter.incrementAndGet();
 		if (val > overflowCount) {
@@ -84,6 +90,14 @@ public class PRFLR {
 		return true;
 	}
 
+	/**
+	 * Stop track time for timer and send data to server
+	 *
+	 * @param timerName Timer name. Max length 48. Can include dot (".") to separate parts of name
+	 * @param info      Some additional information. Max length 32
+	 * @return true if timer already exists, false otherwise
+	 * @throws Exception
+	 */
 	public static boolean end(String timerName, String info) throws Exception {
 		Long startTime = timers.remove(timerId(timerName));
 		if (startTime == null) {

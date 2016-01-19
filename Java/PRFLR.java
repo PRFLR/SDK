@@ -30,11 +30,11 @@ public class PRFLR {
 		String[] parts = apiKey.split("@");
 		PRFLR.key = parts[0];
 		parts = apiKey.split(":");
-		host = parts[0];
-		PRFLR.port = parts[1];
+		String host = parts[0];
+		PRFLR.port = Integer.parseInt(parts[1]);
 
 		try {
-			IPAddress = InetAddress.getByName(parts[0]);
+			IPAddress = InetAddress.getByName(host);
 		} catch (UnknownHostException e) {
 			throw new Exception("Host unknown.");
 		}

@@ -12,25 +12,27 @@ public class PRFLR {
 	public static String key = null;
 	public static Integer port;
 	public static Integer overflowCount = 100;
-	
+
 	private static InetAddress IPAddress;
 	private static DatagramSocket socket;
 	private static ConcurrentHashMap<String, Long> timers;
 	private static AtomicInteger counter = new AtomicInteger(0);
+
 	private PRFLR() {
-		
+
 	}
+
 	public static void init(String source, String apiKey) throws Exception {
-		if(apiKey == null) {
+		if (apiKey == null) {
 			throw new Exception("Unknown apikey.");
 		}
-		
+
 		String[] parts = apiKey.split("@");
-                PRFLR.key  = parts[0];
-                parts = apiKey.split(":");
-                host = parts[0];
-                PRFLR.port = parts[1];
-                
+		PRFLR.key = parts[0];
+		parts = apiKey.split(":");
+		host = parts[0];
+		PRFLR.port = parts[1];
+
 		try {
 			IPAddress = InetAddress.getByName(parts[0]);
 		} catch (UnknownHostException e) {
@@ -41,60 +43,64 @@ public class PRFLR {
 		} catch (SocketException e) {
 			throw new Exception("Can't open socket.");
 		}
-		
-		if(source == null) {
+
+		if (source == null) {
 			throw new Exception("Unknown source.");
-		}
-		else {
+		} else {
 			PRFLR.source = cut(source, 32);
 		}
 		PRFLR.timers = new ConcurrentHashMap<>();
 	}
+
 	private static void cleanTimers() {
 		PRFLR.timers.clear();
 	}
+
 	public static Boolean begin(String timerName) {
 		Integer val = counter.incrementAndGet();
-		if(val > overflowCount) {
+		if (val > overflowCount) {
 			cleanTimers();
 			counter.set(0);
 		}
-		timers.put(Long.toString(Thread.currentThread().getId()) + timerName,System.nanoTime());
+		timers.put(Long.toString(Thread.currentThread().getId()) + timerName, System.nanoTime());
 		return true;
 	}
-	
+
 	public static Boolean end(String timerName, String info) throws Exception {
 		String thread = Long.toString(Thread.currentThread().getId());
 		Long startTime = timers.get(thread + timerName);
-		if(startTime == null) {
+		if (startTime == null) {
 			return false;
 		}
 		counter.decrementAndGet();
 		timers.remove(timerName);
 		Long now = System.nanoTime();
 		Long precision = (long) Math.pow(10, 3);
-		Double diffTime = (double)Math.round((double)(now - startTime) / 1000000 * precision) / precision;
+		Double diffTime = (double) Math.round((double) (now - startTime) / 1000000 * precision) / precision;
 		send(timerName, diffTime, thread, info);
 		return true;
 	}
+
 	private static String cut(String s, Integer maxLength) {
-		if(s.length() < maxLength)
+		if (s.length() < maxLength) {
 			return s;
-		else
+		} else {
 			return s.substring(0, maxLength);
+		}
 	}
+
 	private static void send(String timerName, Double time, String thread, String info) throws Exception {
 		String[] dataForSend = {
-			cut(thread, 32),
-			source,
-			cut(timerName, 48),
-			Double.toString(time),
-			cut(info, 32),
-			key
+				cut(thread, 32),
+				source,
+				cut(timerName, 48),
+				Double.toString(time),
+				cut(info, 32),
+				key
 		};
-		byte[] buffer = String.format(null, "%s|%s|%s|%s|%s|%s", (Object[])dataForSend).getBytes();
+		byte[] buffer = String.format(null, "%s|%s|%s|%s|%s|%s", (Object[]) dataForSend).getBytes();
 		try {
-			socket.send( new DatagramPacket(buffer, buffer.length, IPAddress, port) );
+			socket.send(new DatagramPacket(buffer, buffer.length, IPAddress, port));
 		} catch (IOException e) {
 			throw new Exception("IOException while sending.");
 		}

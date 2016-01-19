@@ -1,4 +1,4 @@
-public class Program {
+public class Test {
 	public static void main(String[] args) {
 		try {
 			PRFLR.init("192.168.1.45-testAppn", "testKey@prflr.org:4000");

@@ -1,13 +1,16 @@
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PRFLR {
+	/**
+	 * prflr://${key}@${host}:${port}
+	 */
+	public static final Pattern API_KEY = Pattern.compile("prflr://([\\w]+)@([\\w.]+):(\\d+)");
+
 	public static String source = null;
 	public static String key = null;
 	public static Integer port;
@@ -22,16 +25,22 @@ public class PRFLR {
 
 	}
 
+	/**
+	 * @param source Source of events
+	 * @param apiKey API key for account in format {@code prflr://${key}@${host}:${port}}
+	 * @throws Exception
+	 */
 	public static void init(String source, String apiKey) throws Exception {
 		if (apiKey == null) {
 			throw new Exception("Unknown apikey.");
 		}
-
-		String[] parts = apiKey.split("@");
-		PRFLR.key = parts[0];
-		parts = apiKey.split(":");
-		String host = parts[0];
-		PRFLR.port = Integer.parseInt(parts[1]);
+		Matcher apiKeyMatcher = API_KEY.matcher(apiKey);
+		if (!apiKeyMatcher.matches()) {
+			throw new Exception("Unknown API key format: " + apiKey);
+		}
+		PRFLR.key = apiKeyMatcher.group(1);
+		String host = apiKeyMatcher.group(2);
+		PRFLR.port = Integer.parseInt(apiKeyMatcher.group(3));
 
 		try {
 			IPAddress = InetAddress.getByName(host);

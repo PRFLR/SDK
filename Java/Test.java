@@ -1,7 +1,7 @@
 public class Test {
 	public static void main(String[] args) {
 		try {
-			PRFLR.init("192.168.1.45-testAppn", "testKey@prflr.org:4000");
+			PRFLR.init("testApp", args.length >= 1 ? args[0] : "prflr://testKey@prflr.org:4000");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

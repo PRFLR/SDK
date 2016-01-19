@@ -115,7 +115,7 @@ public class PRFLR {
 				cut(info, 32),
 				key
 		};
-		byte[] buffer = String.format(null, "%s|%s|%s|%s|%s|%s", (Object[]) dataForSend).getBytes();
+		byte[] buffer = String.format(null, "%s|%s|%s|%s|%s|%s", (Object[]) dataForSend).getBytes("UTF-8");
 		try {
 			socket.send(new DatagramPacket(buffer, buffer.length, IPAddress, port));
 		} catch (IOException e) {

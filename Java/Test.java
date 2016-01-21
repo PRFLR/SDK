@@ -1,13 +1,13 @@
-public class Program {
-	public static void main(String[] args){
+public class Test {
+	public static void main(String[] args) {
 		try {
-			PRFLR.init("192.168.1.45-testAppn", "testKey@prflr.org:4000");
+			PRFLR.init("testApp", args.length >= 1 ? args[0] : "prflr://testKey@prflr.org:4000");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		PRFLR.overflowCount = 50;
 		PRFLR.begin("mongoDB.save");
-		for(int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			PRFLR.begin("mongoDB.save step" + i);
 			try {
 				Thread.sleep(10);
